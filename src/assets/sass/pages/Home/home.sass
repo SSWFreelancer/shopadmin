@@ -87,7 +87,7 @@
         z-index: 2
         position: absolute
         top: 100%
-        left: 0%
+        left: 100%
         background: $white
         transition: all 0.3s ease 0s
         pointer-events:none
@@ -102,6 +102,7 @@
         font-size: 16px
         font-weight: 500
         color: $grey
+        pointer-events: none
         .home__card:nth-child(3n) .home__stats:nth-last-child(-n + 6) &
             transform: translateX(-100%)
         @media(max-width: 1200px) 

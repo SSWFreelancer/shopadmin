@@ -1,0 +1,75 @@
+@import "../../base/variables.sass"
+
+.categories
+    display: flex
+    flex-direction: column
+    gap: 24px
+    &__cards
+        display: flex
+        flex-direction: column
+        gap: 16px
+    &__card 
+        background: $white
+        border: 1px solid $white
+        border-radius: 4px
+        font-size: 20px
+        transition: all 0.3s ease 0s
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14)
+        &.open
+            background: $grey-extra-light
+            border-color: $grey-light
+    &__top
+        display: flex
+        align-items: center
+        justify-content: space-between
+        gap: 12px
+        flex-wrap: wrap
+        padding: 16px
+        cursor: pointer
+        @media(max-width: 600px) 
+            flex-direction: column
+            align-items: stretch
+            justify-content: stretch
+        & p
+            display: flex
+            align-items: center
+            gap: 8px
+            &::before
+                content:''
+                border-left: 7px solid transparent
+                border-right: 7px solid transparent
+                border-top: 8px solid $dark-blue
+                transform: rotate(-90deg)
+                transition: all 0.3s ease 0s
+            .categories__card.open &::before
+                transform: rotate(0deg)
+        & span
+            color: $dark-blue
+            font-weight: 600
+    &__items
+        padding: 16px
+        padding-top: 0
+        display: none
+        flex-direction: column
+        gap: 8px
+        .categories__card.open &
+            display: flex
+    &__item
+        cursor: grab
+        font-weight: 600
+        background-color: $white
+        list-style: none
+        padding: 16px
+        display: flex
+        justify-content: space-between
+        align-items: center
+        flex-wrap: wrap
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14)
+        border-radius: 4px
+        color: $dark-blue
+        & span
+            color: $grey
+        @media(max-width: 600px) 
+            align-items: stretch
+            justify-content: stretch
+            flex-direction: column

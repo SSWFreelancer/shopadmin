@@ -1,0 +1,82 @@
+<template>
+  <div class="products">
+    <Title title="Товары" />
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Фото</th>
+            <th>Название</th>
+            <th>Категория</th>
+            <th>Количество</th>
+            <th>Цена</th>
+            <th>Статус</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ProductCard
+            v-for="product in products"
+            :key="product.id"
+            :imgsrc="product.images[0]?.url"
+            :title="product.title"
+            :subcategoryTitle="product.subcategory.title"
+            :quantity="product.quantity"
+            :price="product.price"
+            :sales="product.status == 1 ? 'Активен' : 'Неактивен'"
+          />
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import axios from "axios";
+import ProductCard from "../Products/ProductCard.vue";
+import Title from "@/components/ui/Title.vue";
+interface ProductImage {
+  url: string;
+  source: string;
+}
+
+interface ProductSubcategory {
+  title: string;
+}
+interface Product {
+  id: string;
+  title: string;
+  subcategory: ProductSubcategory;
+  quantity: number;
+  price: number;
+  status: number;
+  images: ProductImage[];
+}
+@Component({
+  components: {
+    ProductCard,
+    Title,
+  },
+})
+export default class Products extends Vue {
+  products: Product[] = [];
+  loading: boolean = true;
+
+  async mounted() {
+    await this.fetchProducts();
+  }
+
+  async fetchProducts() {
+    try {
+      const response = await axios.get<Product[]>(
+        "https://course-js.javascript.ru/api/rest/products?_embed=subcategory.category&_sort=title&_order=asc&_start=0&_end=30"
+      );
+      this.products = response.data;
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    } finally {
+      this.loading = false;
+    }
+  }
+}
+</script>
