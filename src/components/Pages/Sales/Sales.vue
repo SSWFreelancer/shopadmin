@@ -5,11 +5,41 @@
       <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Клиент</th>
-            <th>Дата</th>
-            <th>Стоимость</th>
-            <th>Статус</th>
+            <th
+              class="table-sort"
+              :class="getHeaderClass('id')"
+              @click="sortProducts('id')"
+            >
+              ID
+            </th>
+            <th
+              class="table-sort"
+              :class="getHeaderClass('user')"
+              @click="sortProducts('user')"
+            >
+              Клиент
+            </th>
+            <th
+              class="table-sort"
+              :class="getHeaderClass('createdAt')"
+              @click="sortProducts('createdAt')"
+            >
+              Дата
+            </th>
+            <th
+              class="table-sort"
+              :class="getHeaderClass('totalCost')"
+              @click="sortProducts('totalCost')"
+            >
+              Стоимость
+            </th>
+            <th
+              class="table-sort"
+              :class="getHeaderClass('delivery')"
+              @click="sortProducts('delivery')"
+            >
+              Статус
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -67,6 +97,38 @@ export default class Sales extends Vue {
       timeZone: "UTC",
     } as const;
     return new Intl.DateTimeFormat("ru-RU", options).format(date);
+  }
+
+  sortKey: string = "";
+  sortOrder: number = 1;
+
+  sortProducts(key: string) {
+    if (this.sortKey === key) {
+      this.sortOrder *= -1;
+    } else {
+      this.sortKey = key;
+      this.sortOrder = 1;
+    }
+
+    this.salesData.sort((a, b) => {
+      const aValue = this.getNestedValue(a, key);
+      const bValue = this.getNestedValue(b, key);
+
+      if (aValue < bValue) return -1 * this.sortOrder;
+      if (aValue > bValue) return 1 * this.sortOrder;
+      return 0;
+    });
+  }
+
+  getNestedValue(obj: any, key: string) {
+    return key.split(".").reduce((o, i) => o[i], obj);
+  }
+  getHeaderClass(key: string) {
+    return {
+      active: this.sortKey === key,
+      up: this.sortKey === key && this.sortOrder === 1,
+      down: this.sortKey === key && this.sortOrder === -1,
+    };
   }
 }
 </script>

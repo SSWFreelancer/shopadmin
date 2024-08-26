@@ -20,9 +20,35 @@
         & th, td
             padding: 15px
         & th
+            cursor: pointer
             text-align: left
             color: $grey-light
             font-weight: 500
+            transition: all 0.3s ease 0s
+            &.table-sort
+                position: relative
+                &::after
+                    content:''
+                    border-left: 6px solid transparent
+                    border-right: 6px solid transparent
+                    border-top: 8px solid $table-black
+                    position: absolute
+                    top: 50%
+                    transform: translate(0, -50%)
+                    right: 1px
+                    pointer-events: none
+                    opacity: 0
+                    transition: all 0.3s ease 0s
+                &.up::after
+                    transform: translate(0, -50%) rotate(180deg)
+                &:hover
+                    color: $table-black
+                    &::after
+                        opacity: 1
+                &.active
+                    color: $table-black
+                    &::after
+                        opacity: 1
         & tr
             border-top: 1px solid $grey-extra-light
         & thead tr

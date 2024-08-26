@@ -16,17 +16,16 @@
           <span>{{ category.count }} продуктов</span>
         </div>
         <div class="categories__items">
-          <div
-            class="categories__item"
-            v-for="subcategory in category.subcategories"
-            :key="subcategory.id"
-          >
-            <p>{{ subcategory.title }}</p>
-            <span>
-              {{ subcategory.count }}
-              продуктов
-            </span>
-          </div>
+          <draggable v-model="category.subcategories" class="draggable-list">
+            <div
+              class="categories__item"
+              v-for="subcategory in category.subcategories"
+              :key="subcategory.id"
+            >
+              <p>{{ subcategory.title }}</p>
+              <span>{{ subcategory.count }} продуктов</span>
+            </div>
+          </draggable>
         </div>
       </div>
     </div>
@@ -38,6 +37,7 @@ import { Component, Vue } from "vue-property-decorator";
 import Title from "@/components/ui/Title.vue";
 import Subtitle from "@/components/ui/Subtitle.vue";
 import axios from "axios";
+import draggable from "vuedraggable";
 interface Subcategory {
   id: string;
   title: string;
@@ -55,6 +55,7 @@ interface Category {
   components: {
     Title,
     Subtitle,
+    draggable,
   },
 })
 export default class Categories extends Vue {

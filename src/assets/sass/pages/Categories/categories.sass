@@ -52,6 +52,10 @@
         display: none
         flex-direction: column
         gap: 8px
+        & .draggable-list
+            display: flex
+            flex-direction: column
+            gap: 8px
         .categories__card.open &
             display: flex
     &__item
@@ -62,14 +66,24 @@
         padding: 16px
         display: flex
         justify-content: space-between
+        border:1px solid $white
         align-items: center
         flex-wrap: wrap
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14)
         border-radius: 4px
         color: $dark-blue
+        transition: all 0.3s ease 0s
+        &.sortable-ghost 
+            border-color: $blue
+
+        &.sortable-chosen
+            border-color: $blue
         & span
             color: $grey
         @media(max-width: 600px) 
             align-items: stretch
             justify-content: stretch
             flex-direction: column
+
+
+    
