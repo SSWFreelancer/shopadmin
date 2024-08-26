@@ -1,0 +1,120 @@
+@import "../../base/variables.sass"
+
+.home
+    display: flex
+    flex-direction: column
+    gap: 40px
+    &__block
+        display: flex
+        flex-direction: column
+        gap: 24px
+    &__cards
+        display: grid
+        grid-template-columns: 1fr 1fr 1fr
+        gap: 24px
+        @media(max-width: 1200px) 
+            gap: 12px
+            grid-template-columns: 1fr 1fr
+        @media(max-width: 600px) 
+            grid-template-columns: 1fr 
+    &__card
+        padding: 16px 26px 24px
+        background: $white
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06)
+        border-radius: 4px
+        border-left: 2px solid $yellow
+        display: flex
+        flex-direction: column
+        gap: 8px
+        @media(max-width: 1200px) 
+            padding: 12px
+        
+        &:nth-child(n + 2)
+            border-color: $green
+        &:nth-child(n + 3)
+            border-color: $purple            
+        &-top
+            display: flex
+            align-items: center
+            justify-content: space-between
+            gap: 8px
+            flex-wrap: wrap
+            font-size: 16px
+            line-height: 20px
+            color: $grey
+            & a
+                color: $blue
+    &__overcount
+        font-weight: 600
+        font-size: 28px
+        line-height: 35px
+        color: $dark-blue
+        margin-bottom: 28px
+        @media(max-width: 1200px) 
+            margin-bottom: 10px
+    &__monthstats
+        display: flex
+        align-items: flex-end
+        height: 70px
+        @media(max-width: 1600px) 
+            height: 60px
+        @media(max-width: 1440px) 
+            height: 50px 
+        gap: 1.5px
+        pointer-events: none
+        margin-top: 12px
+        &:hover .home__stats
+            opacity: 0.5
+    &__stats
+        background: $yellow
+        flex: 1 1 auto
+        position: relative
+        cursor: pointer
+        pointer-events: all
+        transition: all 0.3s ease 0s
+        .home__card:nth-child(2n) &
+            background: $green
+        .home__card:nth-child(3n) &
+            background: $purple 
+        &:hover
+            opacity: 1 !important
+            & .home__dec
+                opacity: 1
+                visibility: visible
+                pointer-events: all
+    &__dec
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06)
+        z-index: 2
+        position: absolute
+        top: 100%
+        left: 0%
+        background: $white
+        transition: all 0.3s ease 0s
+        pointer-events:none
+        white-space: nowrap
+        display: flex
+        flex-direction: column
+        gap: 5px
+        border-radius: 6px
+        padding: 10px 10px
+        opacity:0
+        visibility:hidden
+        font-size: 16px
+        font-weight: 500
+        color: $grey
+        .home__card:nth-child(3n) .home__stats:nth-last-child(-n + 6) &
+            transform: translateX(-100%)
+        @media(max-width: 1200px) 
+            .home__card:nth-child(3n) .home__stats:nth-last-child(-n + 6) &
+                transform: translateX(0)
+            .home__card:nth-child(2n) .home__stats:nth-last-child(-n + 6) &
+                transform: translateX(-100%)
+        @media(max-width: 600px) 
+            .home__card:nth-child(2n) .home__stats:nth-last-child(-n + 6) &
+                transform: translateX(0)
+            .home__card .home__stats:nth-last-child(-n + 9) &
+                transform: translateX(-100%) !important
+        
+        & span
+            color: $table-black
+            font-weight: 700
