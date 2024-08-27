@@ -74,12 +74,7 @@
           <ProductCard
             v-for="product in filteredProducts"
             :key="product.id"
-            :imgsrc="product.images[0]?.url"
-            :title="product.title"
-            :subcategoryTitle="product.subcategory.title"
-            :quantity="product.quantity"
-            :price="product.price"
-            :sales="product.status == 1 ? 'Активен' : 'Неактивен'"
+            :product="product"
           />
         </tbody>
       </table>
@@ -94,23 +89,7 @@ import noUiSlider from "nouislider";
 import "nouislider/dist/nouislider.css";
 import ProductCard from "../Products/ProductCard.vue";
 import Title from "@/components/ui/Title.vue";
-interface ProductImage {
-  url: string;
-  source: string;
-}
-
-interface ProductSubcategory {
-  title: string;
-}
-interface Product {
-  id: string;
-  title: string;
-  subcategory: ProductSubcategory;
-  quantity: number;
-  price: number;
-  status: number;
-  images: ProductImage[];
-}
+import { Product } from "./index";
 @Component({
   components: {
     ProductCard,

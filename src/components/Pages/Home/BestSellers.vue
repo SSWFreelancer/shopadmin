@@ -40,12 +40,8 @@
           <ProductCard
             v-for="product in products"
             :key="product.id"
-            :imgsrc="product.images[0]?.url"
-            :title="product.title"
-            :subcategoryTitle="product.subcategory.title"
-            :quantity="product.quantity"
-            :price="product.price"
-            :sales="product.sales"
+            :product="product"
+            :sales="true"
           />
         </tbody>
       </table>
@@ -57,23 +53,8 @@
 import { Component, Vue } from "vue-property-decorator";
 import axios from "axios";
 import ProductCard from "../Products/ProductCard.vue";
-interface ProductImage {
-  url: string;
-  source: string;
-}
+import { Product } from "./index";
 
-interface ProductSubcategory {
-  title: string;
-}
-interface Product {
-  id: string;
-  title: string;
-  subcategory: ProductSubcategory;
-  quantity: number;
-  price: number;
-  sales: number;
-  images: ProductImage[];
-}
 @Component({
   components: {
     ProductCard,

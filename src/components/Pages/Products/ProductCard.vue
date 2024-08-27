@@ -2,27 +2,27 @@
   <tr>
     <td>
       <div class="table__image">
-        <img :src="imgsrc" :alt="title" />
+        <img :src="product.images[0]?.url" :alt="product.title" />
       </div>
     </td>
-    <td>{{ title }}</td>
-    <td>{{ subcategoryTitle }}</td>
-    <td>{{ quantity }}</td>
-    <td>${{ price }}</td>
-    <td>{{ sales }}</td>
+    <td>{{ product.title }}</td>
+    <td>{{ product.subcategory.title }}</td>
+    <td>{{ product.quantity }}</td>
+    <td>${{ product.price }}</td>
+    <td v-if="sales">
+      {{ product.sales }}
+    </td>
+    <td v-else>{{ product.status == 1 ? "Активен" : "Неактивен" }}</td>
   </tr>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { Product } from "./index";
 @Component
 export default class ProductCard extends Vue {
-  @Prop() imgsrc!: string;
-  @Prop() title!: string;
-  @Prop() subcategoryTitle!: string;
-  @Prop() quantity!: number;
-  @Prop() price!: number;
-  @Prop() sales!: number;
+  @Prop({ required: true }) product!: Product;
+  @Prop({ required: false }) sales!: boolean;
 }
 </script>
 

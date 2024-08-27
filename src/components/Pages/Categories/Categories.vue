@@ -38,18 +38,7 @@ import Title from "@/components/ui/Title.vue";
 import Subtitle from "@/components/ui/Subtitle.vue";
 import axios from "axios";
 import draggable from "vuedraggable";
-interface Subcategory {
-  id: string;
-  title: string;
-  count: number;
-}
-interface Category {
-  id: string;
-  title: string;
-  subcategory: Subcategory[];
-  count: number;
-  isOpen?: boolean;
-}
+import { Category } from "./index";
 
 @Component({
   components: {

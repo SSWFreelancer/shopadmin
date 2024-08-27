@@ -78,9 +78,7 @@ import { Component, Vue } from "vue-property-decorator";
 import axios from "axios";
 import Title from "@/components/ui/Title.vue";
 import Bestsellers from "./BestSellers.vue";
-interface Data {
-  [key: string]: number;
-}
+import { Data } from "./index";
 
 @Component({
   components: {

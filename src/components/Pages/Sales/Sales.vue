@@ -58,15 +58,10 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { SalesData } from "./index";
 import Title from "@/components/ui/Title.vue";
 import axios from "axios";
-interface SalesData {
-  id: string;
-  user: string;
-  createdAt: string;
-  totalCost: number;
-  delivery: string;
-}
+
 @Component({
   components: {
     Title,
